@@ -13,6 +13,7 @@ export default function TodoList(props) {
           style = {{textDecoration: element.completed ? "line-through" : "none"}} 
           onClick={handleToggle(element.id)} key={element.id}>
           {element.item}
+          {element.completionDate ? `, completed on: ${element.completionDate}`: ""}
         </p>
       ))}
       <TodoForm handleSubmit={handleSubmit} clearCompleted = {clearCompleted}/>

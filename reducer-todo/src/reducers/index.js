@@ -1,4 +1,4 @@
-import { func } from "prop-types";
+import moment from "moment";
 
 //Set up the initial state
 export const initialState = {
@@ -46,15 +46,19 @@ export function reducer(state, action) {
         ...state,
         todos: state.todos.map(todo =>
           todo.id == action.payload
-            ? { ...todo, completed: !todo.completed }
+            ? {
+                ...todo,
+                completed: !todo.completed,
+                completionDate: todo.completionDate ? null : moment().format()
+              }
             : todo
         )
       };
     case CLEAR_COMPLETED:
-        return {
-            ...state,
-            todos: state.todos.filter(todo=>!todo.completed)
-        }
+      return {
+        ...state,
+        todos: state.todos.filter(todo => !todo.completed)
+      };
     default:
       return state;
   }
